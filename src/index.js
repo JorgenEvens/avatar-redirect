@@ -1,12 +1,14 @@
 const express = require('express');
-const fetchAvatar = require('lib/fetchers');
+const fetchAvatar = require('./lib/fetchers');
+
+const limitReferer = require('./middleware/referer');
 
 const app = express();
 const { PORT = 5000 } = process.env;
 
 app.set('x-powered-by', false);
 
-app.get('/:network/:user', (req, res) => {
+app.get('/:network/:user', limitReferer, (req, res) => {
     const { network, user } = req.params;
 
     fetchAvatar(network, user, { req })

@@ -4,3 +4,4 @@ env_variables:
   # REDIS_URL: redis://username:password@uri:port/db
   # MEMCACHE_URL: memcache:11211
   # TTL_PROFILE_PICTURE: 3600000
+  # LIMIT_REFERER: ^https://domain.example.org/

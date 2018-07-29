@@ -42,7 +42,8 @@ Each avatar URL follows the same base format which is `<base-url>/<network-name>
 If you are simply trying to show an avatar that would look something like this in HTML:
 
 ```html
-<img src="https://avatar-redirect.appspot.com/twitter/jorgenevens" alt="JorgenEvens on Twitter" />
+<img src="https://avatar-redirect.appspot.com/twitter/jorgenevens"
+    alt="JorgenEvens on Twitter" />
 ```
 
 ## Configuration
@@ -55,6 +56,7 @@ The app is configured using environment variables which you either add to your `
 | MEMCACHE\_URL | connectionString used to connect to a Memcache instance | `undefined` |
 | TTL\_PROFILE\_PICTURE | The duration for which the picture URL is cached in ms | `3600000` (1 hour) |
 | NETWORKS | The social networks available to this deployment, if no value is set all are enabled. | `undefined` |
+| LIMIT\_REFERER | A regular expression matched against the [Referer header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer). If the Referer does not match a `401 Unauthorized` will be returned. | `undefined` |
 
 ## Contributing
 

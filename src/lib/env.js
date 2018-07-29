@@ -6,5 +6,6 @@ module.exports = {
     REDIS_URL: load_env('REDIS_URL', null),
 
     NETWORKS: load_env('NETWORKS', null, toArray),
-    TTL_PROFILE_PICTURE: load_env('TTL_PROFILE_PICTURE', 3600 * 1000)
+    TTL_PROFILE_PICTURE: load_env('TTL_PROFILE_PICTURE', 3600 * 1000),
+    LIMIT_REFERER: load_env('LIMIT_REFERER', null)
 };
