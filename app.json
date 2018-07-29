@@ -1,0 +1,16 @@
+{
+    "name": "Avatar Redirect",
+    "description": "Redirect to social network profile image",
+    "repository": "https://github.com/JorgenEvens/avatar-redirect",
+    "keywords": [
+        "avatar",
+        "redirect",
+        "social",
+        "react-avatar",
+        "twitter",
+        "facebook",
+        "skype",
+        "google",
+        "instagram"
+    ]
+}
