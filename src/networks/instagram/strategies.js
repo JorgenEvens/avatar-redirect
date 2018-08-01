@@ -4,7 +4,7 @@ const _get = require('lodash/get');
 
 const profilePicRegexp = /"profile_pic_url_hd"\s*:\s*"([^"]+)"/i;
 
-async function option1(username, { req }) {
+async function profileScrape(username, { req }) {
     username = encodeURIComponent(username);
 
     const res = await fetch(`https://www.instagram.com/${username}`);
@@ -28,5 +28,5 @@ async function option1(username, { req }) {
 }
 
 module.exports = [
-    option1
+    profileScrape
 ];

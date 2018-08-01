@@ -1,6 +1,6 @@
 const fetch = require('lib/fetch');
 
-async function option1(skypeId) {
+async function skypeApi(skypeId) {
     skypeId = encodeURIComponent(skypeId);
 
     const url = `https://api.skype.com/users/${skypeId}/profile/avatar`;
@@ -13,5 +13,5 @@ async function option1(skypeId) {
 }
 
 module.exports = [
-    option1
+    skypeApi
 ];

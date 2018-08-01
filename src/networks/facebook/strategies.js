@@ -1,6 +1,6 @@
 const fetch = require('lib/fetch');
 
-async function option1(userId, { req }) {
+async function facebookGraph(userId, { req }) {
     userId = encodeURIComponent(userId);
     const size = encodeURIComponent(req.query.size || 100);
 
@@ -14,5 +14,5 @@ async function option1(userId, { req }) {
 }
 
 module.exports = [
-    option1
+    facebookGraph
 ];

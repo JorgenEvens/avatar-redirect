@@ -3,7 +3,7 @@ const _get = require('lodash/get');
 
 const twitterRegexp = /^https?:\/\/(www\.)?twitter\.com\/[^\/]+\/profile_image.*/;
 
-async function option1(username, { req }) {
+async function followRedirect(username, { req }) {
     username = encodeURIComponent(username);
     const size = encodeURIComponent(req.query.size || 'original');
 
@@ -27,5 +27,5 @@ async function option1(username, { req }) {
 }
 
 module.exports = [
-    option1
+    followRedirect
 ];

@@ -1,9 +1,9 @@
 const _pick = require('lodash/pick');
 const objectHash = require('object-hash');
 
+const networks = require('networks');
 const { TTL_PROFILE_PICTURE } = require('lib/env');
 const { client: cache, Memory } = require('lib/cache');
-const networks = require('./networks');
 
 const cacheModifiers = [ 'req.query.size' ];
 
@@ -27,14 +27,16 @@ async function addCache(key, url) {
 
 module.exports = async function fetch(network, username, opts = {}) {
     const fetchers = networks[network];
+    const strategies = fetchers.strategies;
+
     const hash = objectHash(_pick(opts, cacheModifiers));
     const cacheKey = `img.${network}.${username}.${hash}`;
 
-    if (!Array.isArray(fetchers))
+    if (!Array.isArray(strategies))
         throw new Error(`Network ${network} not supported`);
 
     async function next(idx) {
-        const fetcher = fetchers[idx];
+        const fetcher = strategies[idx];
 
         if (typeof fetcher !== 'function')
             return null;
