@@ -47,6 +47,7 @@ module.exports = async function fetch(network, username, opts = {}) {
             if (url)
                 return addCache(cacheKey, url);
         } catch(err) {
+            // eslint-disable-next-line no-console
             console.log({ err }, `Fetch for ${network} failed`);
             /* on error continue to next */
         }
@@ -67,4 +68,4 @@ module.exports = async function fetch(network, username, opts = {}) {
     }
 
     return next(0);
-}
+};

@@ -56,4 +56,4 @@ class MemoryCache extends Cache {
         return (typeof this._cache[key] !== 'undefined');
     }
 
-}
+};

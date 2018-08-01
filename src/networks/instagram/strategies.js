@@ -1,10 +1,9 @@
 const fetch = require('lib/fetch');
 const cheerio = require('cheerio');
-const _get = require('lodash/get');
 
 const profilePicRegexp = /"profile_pic_url_hd"\s*:\s*"([^"]+)"/i;
 
-async function profileScrape(username, { req }) {
+async function profileScrape(username) {
     username = encodeURIComponent(username);
 
     const res = await fetch(`https://www.instagram.com/${username}`);
@@ -15,7 +14,7 @@ async function profileScrape(username, { req }) {
     // Extract HD version from javascript source
     for (const script of scripts) {
         const text = doc(script).html();
-        const picture = profilePicRegexp.exec(html);
+        const picture = profilePicRegexp.exec(text);
 
         if (picture && picture[1])
             return picture[1];

@@ -39,4 +39,4 @@ class Memcache extends Cache {
     async del(key) {
         return this._client.delete(key);
     }
-}
+};

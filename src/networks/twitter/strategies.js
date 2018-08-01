@@ -1,5 +1,4 @@
 const fetch = require('lib/fetch');
-const _get = require('lodash/get');
 
 const twitterRegexp = /^https?:\/\/(www\.)?twitter\.com\/[^\/]+\/profile_image.*/;
 

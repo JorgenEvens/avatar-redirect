@@ -15,13 +15,14 @@ module.exports = [
                 const  { url, expires } = picture;
                 const ttl = expires - Date.now();
 
-                res.set('cache-control', 'public, max-age=${ttl}');
+                res.set('cache-control', `public, max-age=${ttl}`);
                 res.set('Expires', new Date(expires).toUTCString());
 
                 return res.redirect(url);
 
             })
             .catch(err => {
+                // eslint-disable-next-line no-console
                 console.log({ err });
                 res.set('X-Error', err.message);
                 res.status(400);

@@ -10,4 +10,4 @@ module.exports = (url, options = {}) => {
     };
 
     return fetch(url, options);
-}
+};
