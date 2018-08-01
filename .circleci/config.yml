@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:8
+    environment:
+      - MOCHA_FILE: mocha/tests.[hash].xml
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependencies-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}-{{ .BuildNum }}
+          paths:
+            - node_modules
+      - run: npm test
+      - store_artifacts:
+          path: coverage
+      - store_test_results:
+          path: mocha

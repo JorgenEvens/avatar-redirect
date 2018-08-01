@@ -34,4 +34,4 @@ class RedisCache extends Cache {
         return this._client.exists(key) > 0;
     }
 
-}
+};

@@ -15,6 +15,7 @@ module.exports = networks;
     try {
         networks[network] = require('./' + network);
     } catch(err) {
+        // eslint-disable-next-line no-console
         console.error(`Failed to load ${network} due to error: ${err.message}`, err);
     }
 });

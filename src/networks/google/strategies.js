@@ -1,7 +1,7 @@
 const fetch = require('lib/fetch');
 const _get = require('lodash/get');
 
-async function picasaweb(username, { req }) {
+async function picasaweb(username) {
     username = encodeURIComponent(username);
 
     const res = await fetch(`https://picasaweb.google.com/data/entry/api/user/${username}?alt=json`);
