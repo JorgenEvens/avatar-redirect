@@ -3,6 +3,7 @@ const toArray = require('@ambassify/load-env/parsers/array');
 
 module.exports = {
     PORT: load_env('PORT', 5000),
+    LOG_FORMAT: load_env('LOG_FORMAT', 'combined'),
 
     MEMCACHE_URL: load_env('MEMCACHE_URL', null),
     REDIS_URL: load_env('REDIS_URL', null),

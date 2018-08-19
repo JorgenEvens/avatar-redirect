@@ -57,6 +57,7 @@ The app is configured using environment variables which you either add to your `
 | TTL\_PROFILE\_PICTURE | The duration for which the picture URL is cached in ms | `3600000` (1 hour) |
 | NETWORKS | The social networks available to this deployment, if no value is set all are enabled. | `undefined` |
 | LIMIT\_REFERER | A regular expression matched against the [Referer header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer). If the Referer does not match a `401 Unauthorized` will be returned. | `undefined` |
+| LOG\_FORMAT | A valid log format as specified in the [morgan documentation](https://github.com/expressjs/morgan#predefined-formats) | `"combined"` |
 
 ## Contributing
 
