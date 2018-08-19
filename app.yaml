@@ -5,3 +5,4 @@ env_variables:
   # MEMCACHE_URL: memcache:11211
   # TTL_PROFILE_PICTURE: 3600000
   # LIMIT_REFERER: ^https://domain.example.org/
+  # LOG_FORMAT: combined

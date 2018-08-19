@@ -1,9 +1,13 @@
+const morgan = require('morgan');
 const express = require('express');
 
 const app = express();
-const { PORT } = require('lib/env');
+const { PORT, LOG_FORMAT } = require('lib/env');
 
 app.set('x-powered-by', false);
+
+if (LOG_FORMAT !== 'none')
+    app.use(morgan(LOG_FORMAT));
 
 app.get('/:network/:user', ...require('controllers/picture'));
 
