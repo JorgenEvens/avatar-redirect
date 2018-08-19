@@ -1,5 +1,7 @@
 # Avatar Redirect
 
+[![CircleCI](https://circleci.com/gh/JorgenEvens/avatar-redirect.svg?style=svg)](https://circleci.com/gh/JorgenEvens/avatar-redirect)
+
 Redirects to a user's profile picture on any of the supported social networks.
 
 Currently supported:
