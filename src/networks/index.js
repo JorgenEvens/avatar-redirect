@@ -5,7 +5,8 @@ const availableNetworks = [
     'twitter',
     'google',
     'facebook',
-    'skype'
+    'skype',
+    'vkontakte'
 ];
 
 const networks = {};
