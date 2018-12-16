@@ -14,7 +14,10 @@ class RedisCache extends Cache {
     async set(key, value, options = {}) {
         const { ttl } = options;
 
-        const args = [ key, value ];
+        const args = [
+            key,
+            JSON.stringify(value)
+        ];
 
         if (typeof ttl === 'number')
             args.push('PX', options.ttl);
@@ -23,7 +26,13 @@ class RedisCache extends Cache {
     }
 
     async get(key) {
-        return this._client.get(key);
+        const result = await this._client.get(key);
+
+        try {
+            return JSON.parse(result);
+        } catch(e) {
+            return null;
+        }
     }
 
     async del(key) {
