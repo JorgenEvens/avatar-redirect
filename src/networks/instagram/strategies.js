@@ -6,7 +6,7 @@ const profilePicRegexp = /"profile_pic_url_hd"\s*:\s*"([^"]+)"/i;
 async function profileScrape(username) {
     username = encodeURIComponent(username);
 
-    const res = await fetch(`https://www.instagram.com/${username}`);
+    const res = await fetch(`https://www.instagram.com/${username}/`);
     const html = await res.text();
     const doc = cheerio.load(html);
     const scripts = doc('script').get();
@@ -20,10 +20,10 @@ async function profileScrape(username) {
             return picture[1];
     }
 
-    if (doc('meta[property=og:type]').attr('content') != 'profile')
+    if (doc('meta[property="og:type"]').attr('content') != 'profile')
         return null;
 
-    return doc('meta[property=og:image]').attr('content');
+    return doc('meta[property="og:image"]').attr('content');
 }
 
 module.exports = [
