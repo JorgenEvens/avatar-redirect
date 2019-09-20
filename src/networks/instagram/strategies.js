@@ -1,3 +1,4 @@
+const _get = require('lodash/get');
 const fetch = require('lib/fetch');
 const cheerio = require('cheerio');
 
@@ -26,6 +27,28 @@ async function profileScrape(username) {
     return doc('meta[property="og:image"]').attr('content');
 }
 
+async function publicSearch(username) {
+    username = username.toLowerCase();
+
+    const encoded = encodeURIComponent('@' + username);
+    const url = `https://www.instagram.com/web/search/topsearch/?query=${encoded}`;
+    const res = await fetch(url);
+    const json = await res.json();
+
+    if (!json)
+        return null;
+
+    if (!Array.isArray(json.users))
+        return null;
+
+    const users = json.users.filter(u => u.user.username == username);
+    if (users.length < 1)
+        return null;
+
+    return _get(users.pop(), 'user.profile_pic_url', null);
+}
+
 module.exports = [
-    profileScrape
+    profileScrape,
+    publicSearch
 ];
