@@ -1,7 +1,7 @@
 const _get = require('lodash/get');
 
 const fetch = require('lib/fetch');
-const { VKONTAKTE_KEY } = require('lib/env');
+const { VKONTAKTE_KEY, VKONTAKTE_API_VERSION } = require('lib/env');
 
 const PHOTO_FIELDS = encodeURIComponent([
     'photo_50',
@@ -10,7 +10,7 @@ const PHOTO_FIELDS = encodeURIComponent([
     'photo_max'
 ].join(','));
 
-const API_QUERY_PARAMS = `fields=${PHOTO_FIELDS}&access_token=${VKONTAKTE_KEY}&v=5`;
+const API_QUERY_PARAMS = `fields=${PHOTO_FIELDS}&access_token=${VKONTAKTE_KEY}&v=${VKONTAKTE_API_VERSION}`;
 
 async function vkontakteApi(userId, { req }) {
     const { size = 100 } = req.query || {};

@@ -12,5 +12,6 @@ module.exports = {
     TTL_PROFILE_PICTURE: load_env('TTL_PROFILE_PICTURE', 3600 * 1000),
     LIMIT_REFERER: load_env('LIMIT_REFERER', null),
 
-    VKONTAKTE_KEY: load_env('VKONTAKTE_KEY', null)
+    VKONTAKTE_KEY: load_env('VKONTAKTE_KEY', null),
+    VKONTAKTE_API_VERSION: load_env('VKONTAKTE_API_VERSION', '5.101')
 };

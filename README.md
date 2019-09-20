@@ -64,6 +64,7 @@ The app is configured using environment variables which you either add to your `
 | **Network Configuration** |  |  |
 | NETWORKS | The social networks available to this deployment, if no value is set all are enabled. | `undefined` |
 | VKONTAKTE\_KEY | A [Vkontakte service key](https://vk.com/dev/access_token?f=3.%20Service%20Token) to perform API requests with. | `undefined` |
+| VKONTAKTE\_API_VERSION | The API version to use for Vkontakte | `"5.101"` |
 
 ## Contributing
 
