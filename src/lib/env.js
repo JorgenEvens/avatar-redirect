@@ -13,5 +13,7 @@ module.exports = {
     LIMIT_REFERER: load_env('LIMIT_REFERER', null),
 
     VKONTAKTE_KEY: load_env('VKONTAKTE_KEY', null),
-    VKONTAKTE_API_VERSION: load_env('VKONTAKTE_API_VERSION', '5.101')
+    VKONTAKTE_API_VERSION: load_env('VKONTAKTE_API_VERSION', '5.101'),
+
+    GOOGLE_API_KEY: load_env('GOOGLE_API_KEY', null)
 };
