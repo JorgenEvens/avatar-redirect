@@ -2,7 +2,7 @@ const _get = require('lodash/get');
 const fetch = require('lib/fetch');
 const cheerio = require('cheerio');
 
-const profilePicRegexp = /"profile_pic_url_hd"\s*:\s*"([^"]+)"/i;
+const profilePicRegexp = /"profile_pic_url_hd"\s*:\s*("[^"]+")/i;
 
 async function profileScrape(username) {
     username = encodeURIComponent(username);
@@ -18,7 +18,7 @@ async function profileScrape(username) {
         const picture = profilePicRegexp.exec(text);
 
         if (picture && picture[1])
-            return picture[1];
+            return JSON.parse(picture[1]);
     }
 
     if (doc('meta[property="og:type"]').attr('content') != 'profile')
