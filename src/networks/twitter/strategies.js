@@ -1,30 +1,28 @@
 const fetch = require('lib/fetch');
+const cheerio = require('cheerio');
 
-const twitterRegexp = /^https?:\/\/(www\.)?twitter\.com\/[^\/]+\/profile_image.*/;
-
-async function followRedirect(username, { req }) {
+async function profileScrape(username) {
     username = encodeURIComponent(username);
-    const size = encodeURIComponent(req.query.size || 'original');
 
-    let url = `https://twitter.com/${username}/profile_image?size=${size}`;
+    const res = await fetch(`https://www.twitter.com/${username}/`);
+    const html = await res.text();
+    const doc = cheerio.load(html);
 
-    while (url && twitterRegexp.test(url)) {
-        const res = await fetch(url, {
-            headers: {
-                'user-agent': req.get('user-agent')
-            },
-            redirect: 'manual'
-        });
+    const profilePicture = doc('a.profile-picture');
+    const image = profilePicture.attr('data-resolved-url-large') ||
+        profilePicture.attr('data-url') ||
+        profilePicture.attr('href');
 
-        if (![302, 301].includes(res.status))
-            return null;
+    if (!image || typeof image != 'string')
+        return null;
 
-        url = res.headers.get('location');
-    }
+    // Strip size parameter
+    // Ex: https://pbs.twimg.com/profile_images/1184774364702617600/2DmGoqCz_400x400.jpg
+    const original = image.replace(/_([^.\/]+)\.([a-z]+)$/i, '.$2');
 
-    return url;
+    return original;
 }
 
 module.exports = [
-    followRedirect
+    profileScrape
 ];
