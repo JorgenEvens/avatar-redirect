@@ -6,7 +6,8 @@ module.exports = [
     (req, res) => {
         const { network, user } = req.params;
 
-        fetchAvatar(network, user, { req })
+        Promise.resolve()
+            .then(() => fetchAvatar(network, user, { req }))
             .then(picture => {
                 if (!picture || !picture.url) {
                     return res.status(404).end();

@@ -1,4 +1,5 @@
 const _pick = require('lodash/pick');
+const _get = require('lodash/get');
 const objectHash = require('object-hash');
 
 const networks = require('networks');
@@ -27,13 +28,13 @@ async function addCache(key, url) {
 
 module.exports = async function fetch(network, username, opts = {}) {
     const fetchers = networks[network];
-    const strategies = fetchers.strategies;
-
-    const hash = objectHash(_pick(opts, cacheModifiers));
-    const cacheKey = `img.${network}.${username}.${hash}`;
+    const strategies = _get(fetchers, 'strategies');
 
     if (!Array.isArray(strategies))
         throw new Error(`Network ${network} not supported`);
+
+    const hash = objectHash(_pick(opts, cacheModifiers));
+    const cacheKey = `img.${network}.${username}.${hash}`;
 
     async function next(idx) {
         const fetcher = strategies[idx];
