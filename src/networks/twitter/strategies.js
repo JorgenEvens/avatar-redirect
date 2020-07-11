@@ -1,17 +1,13 @@
 const fetch = require('lib/fetch');
 const cheerio = require('cheerio');
 
-async function profileScrape(username) {
-    username = encodeURIComponent(username);
-
-    const res = await fetch(`https://www.twitter.com/${username}/`);
+async function pullFromHTML(url, selector, attrs, fetchOptions = {}) {
+    const res = await fetch(url, fetchOptions);
     const html = await res.text();
     const doc = cheerio.load(html);
 
-    const profilePicture = doc('a.profile-picture');
-    const image = profilePicture.attr('data-resolved-url-large') ||
-        profilePicture.attr('data-url') ||
-        profilePicture.attr('href');
+    const profilePicture = doc(selector);
+    const image = attrs.reduce((r, attr) => r || profilePicture.attr(attr), null);
 
     if (!image || typeof image != 'string')
         return null;
@@ -23,6 +19,34 @@ async function profileScrape(username) {
     return original;
 }
 
+async function mobileProfileScrape(username) {
+    username = encodeURIComponent(username);
+
+    return pullFromHTML(
+        `https://mobile.twitter.com/i/nojs_router?path=%2F${username}`,
+        'td.avatar img',
+        ['src'],
+        {
+            method: 'POST',
+            headers: {
+                'referer': `https://mobile.twitter.com/${username}`
+            }
+        }
+    );
+
+}
+
+async function profileScrape(username) {
+    username = encodeURIComponent(username);
+
+    return pullFromHTML(
+        `https://www.twitter.com/${username}/`,
+        'a.profile-picture',
+        ['data-resolved-url-large', 'data-url', 'href'],
+    );
+}
+
 module.exports = [
-    profileScrape
+    mobileProfileScrape,
+    profileScrape,
 ];
